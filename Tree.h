@@ -77,4 +77,45 @@ public:
 
 		return rightRotation(node);
 	}
+
+	Node* balance(Node* root)
+	{
+		if (root == nullptr)
+		{
+			return nullptr;
+		}
+
+		root->left = balance(root->left);
+		root->right = balance(root->right);
+		root = balance(root);
+
+		return root;
+	}
+
+	Node* insert(Node* node, int value)
+	{
+		if (node == nullptr)
+		{
+			node = new Node();
+			node->value = value;
+			node->left = nullptr;
+			node->right = nullptr;
+
+			return node;
+		}
+
+		if (value < node->value)
+		{
+			root->left = insert(root->left, value);
+		}
+		else if (value > node->value)
+		{
+			node->right = insert(node->right, value);
+		}
+		else
+		{
+			cout << "This value is already contained in AVL Tree " << endl;
+			exit(1);
+		}
+	}
 };
