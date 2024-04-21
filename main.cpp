@@ -6,19 +6,28 @@ using namespace std;
 
 int main()
 {
+    int countNode = 0;
+    cout << "Enter a count of nodes for AVL Tree ";
+    cin >> countNode;
+
+    if (countNode <= 0)
+    {
+        cout << "The count of vertices must be greater than 0";
+        exit(1);
+    }
+
     Tree avlTree;
     Node* root = nullptr;
+    int value;
+
+    for (int i = 0; i < countNode; i++)
+    {
+        cout << "Enter a value for node ";
+        cin >> value;
+        root = avlTree.insert(root, value);
+    }
 
 	cout << "AVL Tree" << endl;
-
-    root = avlTree.insert(root, 30);
-    root = avlTree.insert(root, 20);
-    root = avlTree.insert(root, 40);
-    root = avlTree.insert(root, 10);
-    root = avlTree.insert(root, 25);
-    root = avlTree.insert(root, 35);
-    root = avlTree.insert(root, 50);
-
     avlTree.bypass(root);
     cout << endl;
     printTree(root);
