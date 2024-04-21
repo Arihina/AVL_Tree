@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 using namespace std;
 
@@ -78,34 +79,34 @@ public:
 		return rightRotation(node);
 	}
 
-	Node* balanceNode(Node* temp)
+	Node* balanceNode(Node* subTree)
 	{
-		int ratio = findHeightDifference(temp);
+		int ratio = findHeightDifference(subTree);
 
 		if (ratio > 1)
 		{
-			if (findHeightDifference(temp->left) > 0)
+			if (findHeightDifference(subTree->left) > 0)
 			{
-				temp = leftRotation(temp);
+				subTree = leftRotation(subTree);
 			}
 			else
 			{
-				temp = leftRightRotation(temp);
+				subTree = leftRightRotation(subTree);
 			}
 		}
 		else if (ratio < -1)
 		{
-			if (findHeightDifference(temp->right) > 0)
+			if (findHeightDifference(subTree->right) > 0)
 			{
-				temp = rightLeftRotation(temp);
+				subTree = rightLeftRotation(subTree);
 			}
 			else
 			{
-				temp = rightRotation(temp);
+				subTree = rightRotation(subTree);
 			}
 		}
 
-		return temp;
+		return subTree;
 	}
 
 	Node* balance(Node* root)
@@ -136,7 +137,7 @@ public:
 
 		if (value < node->value)
 		{
-			root->left = insert(root->left, value);
+			node->left = insert(node->left, value);
 		}
 		else if (value > node->value)
 		{
@@ -146,6 +147,18 @@ public:
 		{
 			cout << "This value is already contained in AVL Tree " << endl;
 			exit(1);
+		}
+
+		return balanceNode(node);
+	}
+
+	void bypass(Node* root)
+	{
+		if (root != nullptr)
+		{
+			cout << "Value: " << root->value << " ";
+			bypass(root->left);
+			bypass(root->right);
 		}
 	}
 };
