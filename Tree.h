@@ -33,11 +33,7 @@ public:
 		int height = 0;
 		if (temp != nullptr)
 		{
-			int left = findHeight(temp->left);
-			int right = findHeight(temp->right);
-			int maxHeight = max(left, right);
-
-			height = maxHeight + 1;
+			height = max(findHeight(temp->left), findHeight(temp->right)) + 1;
 		}
 
 		return height;
@@ -64,5 +60,13 @@ public:
 		buff->right = node;
 
 		return buff;
+	}
+
+	Node* leftRightRotation(Node* node)
+	{
+		Node* buff = node->right;
+		node->right = rightRotation(buff);
+
+		return leftRotation(node);
 	}
 };
