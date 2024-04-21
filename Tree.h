@@ -69,4 +69,12 @@ public:
 
 		return leftRotation(node);
 	}
+
+	Node* rightLeftRotation(Node* node)
+	{
+		Node* buff = node->right;
+		node->right = leftRotation(buff);
+
+		return rightRotation(node);
+	}
 };
