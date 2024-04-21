@@ -1,5 +1,4 @@
 #pragma once
-#include <algorithm>
 
 using namespace std;
 
@@ -42,5 +41,20 @@ public:
 		}
 
 		return height;
+	}
+
+	int findHeightDifference(Node* temp)
+	{
+		return findHeight(temp->left) - findHeight(temp->right);
+	}
+
+	Node* rightRotation(Node* node)
+	{
+		Node* buff;
+		buff = node->right;
+		node->right = buff->left;
+		buff->left = node;
+
+		return buff;
 	}
 };
