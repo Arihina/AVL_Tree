@@ -78,6 +78,36 @@ public:
 		return rightRotation(node);
 	}
 
+	Node* balanceNode(Node* temp)
+	{
+		int ratio = findHeightDifference(temp);
+
+		if (ratio > 1)
+		{
+			if (findHeightDifference(temp->left) > 0)
+			{
+				temp = leftRotation(temp);
+			}
+			else
+			{
+				temp = leftRightRotation(temp);
+			}
+		}
+		else if (ratio < -1)
+		{
+			if (findHeightDifference(temp->right) > 0)
+			{
+				temp = rightLeftRotation(temp);
+			}
+			else
+			{
+				temp = rightRotation(temp);
+			}
+		}
+
+		return temp;
+	}
+
 	Node* balance(Node* root)
 	{
 		if (root == nullptr)
@@ -85,9 +115,9 @@ public:
 			return nullptr;
 		}
 
-		root->left = balance(root->left);
-		root->right = balance(root->right);
-		root = balance(root);
+		root->left = balanceNode(root->left);
+		root->right = balanceNode(root->right);
+		root = balanceNode(root);
 
 		return root;
 	}
