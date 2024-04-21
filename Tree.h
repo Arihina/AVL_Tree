@@ -50,10 +50,18 @@ public:
 
 	Node* rightRotation(Node* node)
 	{
-		Node* buff;
-		buff = node->right;
+		Node* buff = node->right;
 		node->right = buff->left;
 		buff->left = node;
+
+		return buff;
+	}
+
+	Node* leftRotation(Node* node)
+	{
+		Node* buff = node->left;
+		node->left = buff->right;
+		buff->right = node;
 
 		return buff;
 	}
