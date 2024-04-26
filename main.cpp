@@ -31,6 +31,7 @@ int main()
     avlTree.bypass(root);
     cout << endl;
     printTree(root);
+    cin >> countNode;
 }
 
 
