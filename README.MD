@@ -11,6 +11,7 @@ To work with the AVL tree, it was implemented:
     - Right-Left rotation
     - Left-Right rotation
 - Insert value
+- Remove value
 - Balance tree
 - Format output to the console
 
