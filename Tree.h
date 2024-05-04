@@ -16,12 +16,18 @@ class Tree
 {
 private:
 	Node* root;
-	Node* temp;
+
+	Node* findMinNode(Node* node) {
+		Node* current = node;
+		while (current && current->left != nullptr) {
+			current = current->left;
+		}
+		return current;
+	}
 public:
 	Tree()
 	{
 		root = nullptr;
-		temp = nullptr;
 	}
 	
 	Node** getRoot()
@@ -160,5 +166,62 @@ public:
 			bypass(root->left);
 			bypass(root->right);
 		}
+	}
+
+	Node* remove(Node* root, int value)
+	{
+		if (root == nullptr)
+		{
+			return root;
+		}
+
+		if (value < root->value)
+		{
+			root->left = remove(root->left, value);
+		}
+		else if (value > root->value)
+		{
+			root->right = remove(root->right, value);
+		}
+		else
+		{
+			if (root->left == nullptr || root->right == nullptr)
+			{
+				Node* temp;
+				if (root->left != nullptr)
+				{
+					temp = root->left;
+				}
+				else 
+				{
+					temp = root->right;
+				}
+
+				if (temp == nullptr)
+				{
+					temp = root;
+					root = nullptr;
+				}
+				else
+				{
+					*root = *temp;
+				}
+
+				delete temp;
+			}
+			else
+			{
+				Node* temp = findMinNode(root->right);
+				root->value = temp->value;
+				root->right = remove(root->right, temp->value);
+			}
+		}
+
+		if (root == nullptr)
+		{
+			return root;
+		}
+
+		return balanceNode(root);
 	}
 };
