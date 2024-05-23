@@ -24,16 +24,6 @@ private:
 		}
 		return current;
 	}
-public:
-	Tree()
-	{
-		root = nullptr;
-	}
-	
-	Node** getRoot()
-	{
-		return &root;
-	}
 
 	int findHeight(Node* temp)
 	{
@@ -124,9 +114,18 @@ public:
 
 		root->left = balanceNode(root->left);
 		root->right = balanceNode(root->right);
-		root = balanceNode(root);
 
-		return root;
+		return balanceNode(root);
+	}
+public:
+	Tree()
+	{
+		root = nullptr;
+	}
+	
+	Node** getRoot()
+	{
+		return &root;
 	}
 
 	Node* insert(Node* node, int value)
@@ -187,16 +186,7 @@ public:
 		{
 			if (root->left == nullptr || root->right == nullptr)
 			{
-				Node* temp;
-				if (root->left != nullptr)
-				{
-					temp = root->left;
-				}
-				else 
-				{
-					temp = root->right;
-				}
-
+				Node* temp = root->left ? root->left : root->right;
 				if (temp == nullptr)
 				{
 					temp = root;
